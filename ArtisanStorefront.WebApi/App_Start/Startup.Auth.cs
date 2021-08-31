@@ -10,6 +10,7 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using ArtisanStorefront.WebApi.Providers;
 using ArtisanStorefront.WebApi.Models;
+using ArtisanStorefront.Data;
 
 namespace ArtisanStorefront.WebApi
 {

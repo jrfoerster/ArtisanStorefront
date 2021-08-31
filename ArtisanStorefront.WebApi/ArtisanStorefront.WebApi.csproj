@@ -213,7 +213,6 @@
     </Compile>
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
@@ -306,6 +305,20 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ArtisanStorefront.Data\ArtisanStorefront.Data.csproj">
+      <Project>{4af3c0c6-1870-4641-a327-93590efbe1bd}</Project>
+      <Name>ArtisanStorefront.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ArtisanStorefront.Models\ArtisanStorefront.Models.csproj">
+      <Project>{3afb3261-0378-40af-9e7b-ab82f26f1601}</Project>
+      <Name>ArtisanStorefront.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ArtisanStorefront.Services\ArtisanStorefront.Services.csproj">
+      <Project>{c032bbd2-d478-443e-8815-de93ab2fcb1a}</Project>
+      <Name>ArtisanStorefront.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

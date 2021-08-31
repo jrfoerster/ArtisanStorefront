@@ -16,6 +16,7 @@ using Microsoft.Owin.Security.OAuth;
 using ArtisanStorefront.WebApi.Models;
 using ArtisanStorefront.WebApi.Providers;
 using ArtisanStorefront.WebApi.Results;
+using ArtisanStorefront.Data;
 
 namespace ArtisanStorefront.WebApi.Controllers
 {
