@@ -54,11 +54,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OrderService.cs" />
+    <Compile Include="ProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ArtisanStorefront.Data\ArtisanStorefront.Data.csproj">
+      <Project>{4af3c0c6-1870-4641-a327-93590efbe1bd}</Project>
+      <Name>ArtisanStorefront.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ArtisanStorefront.Models\ArtisanStorefront.Models.csproj">
+      <Project>{3afb3261-0378-40af-9e7b-ab82f26f1601}</Project>
+      <Name>ArtisanStorefront.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
