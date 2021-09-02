@@ -104,6 +104,12 @@ namespace ArtisanStorefront.Services
             using (var context = new ApplicationDbContext())
             {
                 var product = context.Products.Find(id);
+
+                if (product is null)
+                {
+                    return false;
+                }
+
                 context.Products.Remove(product);
                 return context.SaveChanges() == 1;
             }

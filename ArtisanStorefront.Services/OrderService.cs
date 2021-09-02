@@ -71,8 +71,6 @@ namespace ArtisanStorefront.Services
             }
         }
 
-
-
         //UPDATE
         public bool UpdateOrder(EditOrder model)
         {
@@ -89,12 +87,5 @@ namespace ArtisanStorefront.Services
                 return ctx.SaveChanges() == 1;
             }
         }
-
-
     }
-
-   
-
-    
-
 }
