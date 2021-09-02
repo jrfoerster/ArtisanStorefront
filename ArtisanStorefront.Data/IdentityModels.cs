@@ -33,8 +33,8 @@ namespace ArtisanStorefront.Data
             return new ApplicationDbContext();
         }
 
-        DbSet<Product> Products { get; set; }
-        DbSet<Order> Orders { get; set; }
+        public DbSet<Product> Products { get; set; }
+       public DbSet<Order> Orders { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
