@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArtisanStorefront.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -27,9 +28,19 @@ namespace ArtisanStorefront.WebApi.Controllers
         }
 
         // PUT: api/Order/5
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult Put(EditOrder order)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var service = CreateOrderService();
+
+            if (!service.UpdateOrder(order))
+                return InternalServerError();
+
+            return Ok();
         }
+
 
         // DELETE: api/Order/5
         public void Delete(int id)

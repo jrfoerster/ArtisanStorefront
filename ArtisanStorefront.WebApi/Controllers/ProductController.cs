@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArtisanStorefront.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,16 +11,20 @@ namespace ArtisanStorefront.WebApi.Controllers
     [Authorize]
     public class ProductController : ApiController
     {
-        // GET: api/Product
-        public IEnumerable<string> Get()
+        // GET All -- READ ALL
+        public IHttpActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            ProductService productService = CreateProductService();
+            var products = productService.GetProducts();
+            return Ok(products);
         }
 
-        // GET: api/Product/5
-        public string Get(int id)
+        // GET by id  -- READ by id
+        public IHttpActionResult Get(int id)
         {
-            return "value";
+            ProductService productService = CreateProductService();
+            var product = productService.GetProductById(id);
+            return Ok(note);
         }
 
         // POST: api/Product
