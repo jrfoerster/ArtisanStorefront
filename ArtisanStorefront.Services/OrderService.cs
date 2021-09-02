@@ -37,5 +37,24 @@ namespace ArtisanStorefront.Services
         }
 
 
+
+        //UPDATE
+        public bool UpdateNote(EditOrder model)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                ctx
+                .Orders
+                .Single(e => e.OrderId == model.OrderId && e.SellerId == _userId);
+
+                entity.Quantity = model.Quantity;
+                entity.IsExpedited = model.IsExpedited;
+
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
+
     }
 }

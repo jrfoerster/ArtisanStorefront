@@ -13,6 +13,12 @@ namespace ArtisanStorefront.WebApi.Controllers
     [Authorize]
     public class ProductController : ApiController
     {
+        private ProductService CreateProductService()
+        {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            return new ProductService(userId);
+        }
+
         // GET: api/Product
         public IEnumerable<string> Get()
         {
@@ -26,8 +32,26 @@ namespace ArtisanStorefront.WebApi.Controllers
         }
 
         // POST: api/Product
-        public void Post([FromBody]string value)
+        public IHttpActionResult Post([FromBody] ProductCreate product)
         {
+            if (product is null)
+            {
+                return BadRequest("Http Request Body cannot be empty!");
+            }
+
+            if (ModelState.IsValid == false)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var service = CreateProductService();
+
+            if (service.CreateProduct(product) == false)
+            {
+                return InternalServerError();
+            }
+
+            return Ok();
         }
 
         // PUT: api/Product/5
@@ -55,8 +79,18 @@ namespace ArtisanStorefront.WebApi.Controllers
         
 
         // DELETE: api/Product/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
+            var service = CreateProductService();
+
+            if (service.DeleteProduct(id))
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }

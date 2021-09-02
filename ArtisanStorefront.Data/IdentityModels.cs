@@ -34,7 +34,7 @@ namespace ArtisanStorefront.Data
         }
 
         public DbSet<Product> Products { get; set; }
-       public DbSet<Order> Orders { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
