@@ -1,4 +1,8 @@
-﻿using System;
+using ArtisanStorefront.Models;
+using ArtisanStorefront.Models;
+using ArtisanStorefront.Services;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -34,15 +38,53 @@ namespace ArtisanStorefront.WebApi.Controllers
         }
     }
 
-    // POST: api/Order
-    public void Post([FromBody]string value)
+        private OrderService CreateOrderService()
         {
+            var userId = Guid.Parse(User.Identity.GetUserId());
+            var orderService = new OrderService(userId);
+            return orderService;
+        }
+        // POST: api/Order
+        public IHttpActionResult Post(OrderCreate order)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var service = CreateOrderService();
+
+            if (!service.CreateOrder(order))
+                return InternalServerError();
+
+            return Ok();
+
         }
 
         // PUT: api/Order/5
-        public void Put(int id, [FromBody]string value)
+        public IHttpActionResult Put(EditOrder order)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var service = CreateOrderService();
+
+            if (!service.UpdateOrder(order))
+                return InternalServerError();
+
+            return Ok();
         }
+        public IHttpActionResult Put(EditOrder order)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var service = CreateOrderService();
+
+            if (!service.UpdateOrder(order))
+                return InternalServerError();
+
+            return Ok();
+        }
+
 
         // DELETE: api/Order/5
       //  public void Delete(int id)
