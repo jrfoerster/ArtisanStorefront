@@ -35,5 +35,15 @@ namespace ArtisanStorefront.Services
                 return context.SaveChanges() == 1;
             }
         }
+
+        public bool DeleteProduct(int id)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var product = context.Products.Find(id);
+                context.Products.Remove(product);
+                return context.SaveChanges() == 1;
+            }
+        }
     }
 }

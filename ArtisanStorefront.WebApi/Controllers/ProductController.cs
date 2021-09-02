@@ -60,8 +60,18 @@ namespace ArtisanStorefront.WebApi.Controllers
         }
 
         // DELETE: api/Product/5
-        public void Delete(int id)
+        public IHttpActionResult Delete(int id)
         {
+            var service = CreateProductService();
+
+            if (service.DeleteProduct(id))
+            {
+                return Ok();
+            }
+            else
+            {
+                return NotFound();
+            }
         }
     }
 }
