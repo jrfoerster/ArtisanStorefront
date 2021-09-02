@@ -16,10 +16,10 @@ namespace ArtisanStorefront.WebApi.Controllers
         }
 
         //Get order by ID
-        public IHttpActionResult Get(int orderId)
+        public IHttpActionResult Get(int id)
         {
             OrderService orderService = CreateOrderService();
-            var order = orderService.GetOrderById(orderId);
+            var order = orderService.GetOrderById(id);
             return Ok(order);
         }
 
@@ -52,10 +52,10 @@ namespace ArtisanStorefront.WebApi.Controllers
         }
 
         // DELETE: api/Order/5
-        public IHttpActionResult Delete(int orderId)
+        public IHttpActionResult Delete(int id)
         {
             var service = CreateOrderService();
-            if (!service.DeleteOrder(orderId))
+            if (!service.DeleteOrder(id))
                 return InternalServerError();
 
             return Ok();
