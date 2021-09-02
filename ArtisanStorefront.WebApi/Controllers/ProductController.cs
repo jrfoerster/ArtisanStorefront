@@ -55,9 +55,28 @@ namespace ArtisanStorefront.WebApi.Controllers
         }
 
         // PUT: api/Product/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+       
+       
+        
+            private ProductService CreateProductService()
+            {
+                var userId = Guid.Parse(User.Identity.GetUserId());
+                var productService = new ProductService(userId);
+                return productService;
+            }
+
+            public IHttpActionResult Put(ProductEdit product)
+            {
+                if (!ModelState.IsValid)
+                    return BadRequest(ModelState);
+                var service = CreateProductService();
+
+                if (!service.UpdateProduct(product))
+                    return InternalServerError();
+
+                return Ok();
+            }
+        
 
         // DELETE: api/Product/5
         public IHttpActionResult Delete(int id)

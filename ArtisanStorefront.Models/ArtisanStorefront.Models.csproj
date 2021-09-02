@@ -54,6 +54,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OrderCreate.cs" />
+    <Compile Include="ProductEdit.cs" />
     <Compile Include="EditOrder.cs" />
     <Compile Include="ProductCreate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

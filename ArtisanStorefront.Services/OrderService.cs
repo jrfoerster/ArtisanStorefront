@@ -17,6 +17,25 @@ namespace ArtisanStorefront.Services
             _userId = userId;
         }
 
+        public bool CreateOrder(OrderCreate model)
+        {
+            var entity =
+                new Order()
+                {
+                    BuyerId = _userId,
+                    Quantity = model.Quantity,
+                    PurchaseDate = DateTimeOffset.Now,
+                    AmountDue = model.AmountDue
+
+                };
+
+            using (var ctx = new ApplicationDbContext())
+            {
+                ctx.Orders.Add(entity);
+                return ctx.SaveChanges() == 1;
+            }
+        }
+
 
 
         //UPDATE

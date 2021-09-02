@@ -17,6 +17,25 @@ namespace ArtisanStorefront.Services
             _userId = userId;
         }
 
+        public bool UpdateProduct(ProductEdit model)
+        {
+            using(var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                ctx
+                .Products
+                .Single(e => e.ProductId == model.ProductId && e.SellerId == _userId);
+
+                entity.ProductId = model.ProductId;
+                entity.Name = model.Name;
+                entity.Stock = model.Stock;
+                entity.Price = model.Price;
+
+                return ctx.SaveChanges() == 1;
+            }
+            
+        }
+
         public bool CreateProduct(ProductCreate model)
         {
             var entity = new Product()
