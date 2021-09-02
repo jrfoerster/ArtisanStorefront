@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ArtisanStorefront.Data;
+using ArtisanStorefront.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,23 @@ namespace ArtisanStorefront.Services
             _userId = userId;
         }
 
+        public bool CreateProduct(ProductCreate model)
+        {
+            var entity = new Product()
+            {
+                SellerId = _userId,
+                Name = model.Name,
+                Description = model.Description,
+                Price = model.Price,
+                Stock = model.Stock,
+                ProductType = model.ProductType
+            };
 
+            using (var context = new ApplicationDbContext())
+            {
+                context.Products.Add(entity);
+                return context.SaveChanges() == 1;
+            }
+        }
     }
 }
