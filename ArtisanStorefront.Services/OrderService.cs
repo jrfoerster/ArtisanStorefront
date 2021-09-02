@@ -1,12 +1,7 @@
 ﻿using ArtisanStorefront.Data;
 using ArtisanStorefront.Models;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ArtisanStorefront.Data;
-using ArtisanStorefront.Models;
 
 namespace ArtisanStorefront.Services
 {
@@ -79,7 +74,7 @@ namespace ArtisanStorefront.Services
 
 
         //UPDATE
-        public bool UpdateNote(EditOrder model)
+        public bool UpdateOrder(EditOrder model)
         {
             using (var ctx = new ApplicationDbContext())
             {

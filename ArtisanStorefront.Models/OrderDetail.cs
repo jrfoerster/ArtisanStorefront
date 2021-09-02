@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArtisanStorefront.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,8 +11,6 @@ namespace ArtisanStorefront.Models
 {
     public class OrderDetail
     {
-
-
         public int OrderId { get; set; }
 
         public int ProductId { get; set; }
@@ -28,7 +27,5 @@ namespace ArtisanStorefront.Models
         public Guid BuyerId { get; set; }
 
         public Guid SellerId { get; set; }
-
     }
 }
-
