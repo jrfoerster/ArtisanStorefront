@@ -1,4 +1,5 @@
 ﻿using ArtisanStorefront.Data;
+using ArtisanStorefront.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,26 +18,21 @@ namespace ArtisanStorefront.Services
         }
 
 
-
-
-
-
         // GET -- READ
-        public IEnumerable<ProductListItem> GetNotes()
+        public IEnumerable<ProductListItem> GetProducts()
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var query =
                 ctx
                 .Products
-                .Where(e => e.OwnerId == _userId)
+                .Where(e => e.SellerId == _userId)
                 .Select(
                 e =>
                 new ProductListItem
                 {
-                    NoteId = e.NoteId,
-                    Title = e.Title,
-                    CreatedUtc = e.CreatedUtc
+                    ProductId = e.ProductId,
+                    Name = e.Name,
                 }
                 );
                 return query.ToArray();
@@ -44,22 +40,24 @@ namespace ArtisanStorefront.Services
         }
 
         //GET BY ID ---  READ BY ID
-        public NoteDetail GetNoteById(int id)
+        public ProductDetail GetProductById(int id)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                 ctx
-                .Notes
-                .Single(e => e.NoteId == id && e.OwnerId == _userId);
+                .Products
+                .Single(e => e.ProductId == id && e.SellerId == _userId);
                 return
-                new NoteDetail
+                new ProductDetail
                 {
-                    NoteId = entity.NoteId,
-                    Title = entity.Title,
-                    Content = entity.Content,
-                    CreatedUtc = entity.CreatedUtc,
-                    ModifiedUtc = entity.ModifiedUtc
+                    ProductId = entity.ProductId,
+                    Name = entity.Name,
+                    Description = entity.Description,
+                    Price = entity.Price,
+                    Stock = entity.Stock,
+                    SellerId = entity.SellerId,
+                    ProductType = entity.ProductType
                 };
             }
         }

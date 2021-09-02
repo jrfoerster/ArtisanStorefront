@@ -11,6 +11,7 @@ namespace ArtisanStorefront.WebApi.Controllers
     [Authorize]
     public class ProductController : ApiController
     {
+
         // GET All -- READ ALL
         public IHttpActionResult Get()
         {
@@ -24,8 +25,9 @@ namespace ArtisanStorefront.WebApi.Controllers
         {
             ProductService productService = CreateProductService();
             var product = productService.GetProductById(id);
-            return Ok(note);
+            return Ok(product);
         }
+
 
         // POST: api/Product
         public void Post([FromBody]string value)
