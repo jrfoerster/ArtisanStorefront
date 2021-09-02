@@ -1,4 +1,5 @@
 ﻿using ArtisanStorefront.Data;
+using ArtisanStorefront.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,21 +19,18 @@ namespace ArtisanStorefront.Services
 
 
 
-
-
         //UPDATE
-        public bool UpdateNote(NoteEdit model)
+        public bool UpdateNote(EditOrder model)
         {
             using (var ctx = new ApplicationDbContext())
             {
                 var entity =
                 ctx
                 .Orders
-                .Single(e => e.OrderId == model.NoteId && e.OwnerId == _userId);
+                .Single(e => e.OrderId == model.OrderId && e.SellerId == _userId);
 
-                entity.Title = model.Title;
-                entity.Content = model.Content;
-                entity.ModifiedUtc = DateTimeOffset.UtcNow;
+                entity.Quantity = model.Quantity;
+                entity.IsExpedited = model.IsExpedited;
 
                 return ctx.SaveChanges() == 1;
             }
