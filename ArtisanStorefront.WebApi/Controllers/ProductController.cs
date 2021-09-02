@@ -1,3 +1,4 @@
+﻿using ArtisanStorefront.Services;
 ﻿using ArtisanStorefront.Models;
 using ArtisanStorefront.Services;
 using Microsoft.AspNet.Identity;
@@ -20,15 +21,19 @@ namespace ArtisanStorefront.WebApi.Controllers
         }
 
         // GET: api/Product
-        public IEnumerable<string> Get()
+        public IHttpActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            ProductService productService = CreateProductService();
+            var products = productService.GetProducts();
+            return Ok(products);
         }
 
-        // GET: api/Product/5
-        public string Get(int id)
+        // GET by id  -- READ by id
+        public IHttpActionResult Get(int id)
         {
-            return "value";
+            ProductService productService = CreateProductService();
+            var product = productService.GetProductById(id);
+            return Ok(product);
         }
 
         // POST: api/Product

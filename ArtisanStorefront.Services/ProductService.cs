@@ -55,6 +55,50 @@ namespace ArtisanStorefront.Services
             }
         }
 
+        // GET -- READ
+        public IEnumerable<ProductListItem> GetProducts()
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var query =
+                ctx
+                .Products
+                .Where(e => e.SellerId == _userId)
+                .Select(
+                e =>
+                new ProductListItem
+                {
+                    ProductId = e.ProductId,
+                    Name = e.Name,
+                }
+                );
+                return query.ToArray();
+            }
+        }
+
+        //GET BY ID ---  READ BY ID
+        public ProductDetail GetProductById(int id)
+        {
+            using (var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                ctx
+                .Products
+                .Single(e => e.ProductId == id && e.SellerId == _userId);
+                return
+                new ProductDetail
+                {
+                    ProductId = entity.ProductId,
+                    Name = entity.Name,
+                    Description = entity.Description,
+                    Price = entity.Price,
+                    Stock = entity.Stock,
+                    SellerId = entity.SellerId,
+                    ProductType = entity.ProductType
+                };
+            }
+        }
+      
         public bool DeleteProduct(int id)
         {
             using (var context = new ApplicationDbContext())
