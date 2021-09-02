@@ -17,6 +17,43 @@ namespace ArtisanStorefront.Services
             _userId = userId;
         }
 
+        public bool UpdateProduct(ProductEdit model)
+        {
+            using(var ctx = new ApplicationDbContext())
+            {
+                var entity =
+                ctx
+                .Products
+                .Single(e => e.ProductId == model.ProductId && e.SellerId == _userId);
+
+                entity.ProductId = model.ProductId;
+                entity.Name = model.Name;
+                entity.Stock = model.Stock;
+                entity.Price = model.Price;
+
+                return ctx.SaveChanges() == 1;
+            }
+            
+        }
+
+        public bool CreateProduct(ProductCreate model)
+        {
+            var entity = new Product()
+            {
+                SellerId = _userId,
+                Name = model.Name,
+                Description = model.Description,
+                Price = model.Price,
+                Stock = model.Stock,
+                ProductType = model.ProductType
+            };
+
+            using (var context = new ApplicationDbContext())
+            {
+                context.Products.Add(entity);
+                return context.SaveChanges() == 1;
+            }
+        }
 
         // GET -- READ
         public IEnumerable<ProductListItem> GetProducts()
@@ -61,7 +98,15 @@ namespace ArtisanStorefront.Services
                 };
             }
         }
-
-
+      
+        public bool DeleteProduct(int id)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                var product = context.Products.Find(id);
+                context.Products.Remove(product);
+                return context.SaveChanges() == 1;
+            }
+        }
     }
 }
